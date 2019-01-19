@@ -14,7 +14,11 @@ export class TaskList { // несмотря на то, что будет тол�
         this.items.push(item); // в конец
     }
 
-    remove() {
-        // TODO:
+    remove(item) {
+        const index = this.items.indexOf(item);
+
+        if (index !== -1) {
+            this.items.splice(index, 1);
+        }
     }
 }
