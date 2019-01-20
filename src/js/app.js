@@ -34,8 +34,16 @@ function rebuildTree(container, list) {
 
         liEl.innerHTML = `
             ${item.name}
-            <button class="btn btn-danger btn-sm float-right">Remove</button>
+            <button data-id="remove" class="btn btn-danger btn-sm float-right">Remove</button>
         `;
+        // data-<name> (html data-attributes)
+
+        const removeEl = liEl.querySelector('[data-id=remove]'); // внутри элемента li
+        removeEl.addEventListener('click', function(evt) {
+           taskList.remove(item);
+           rebuildTree(container, list);
+        });
+
         container.appendChild(liEl);
     }
 }
