@@ -40,6 +40,18 @@ function rebuildTree(container, list) {
         `;
         // data-<name> (html data-attributes)
 
+        const upEl = liEl.querySelector('[data-id=up]'); // внутри элемента li
+        upEl.addEventListener('click', function(evt) {
+            taskList.up(item);
+            rebuildTree(container, list);
+        });
+
+        const downEl = liEl.querySelector('[data-id=down]'); // внутри элемента li
+        downEl.addEventListener('click', function(evt) {
+            taskList.down(item);
+            rebuildTree(container, list);
+        });
+
         const removeEl = liEl.querySelector('[data-id=remove]'); // внутри элемента li
         removeEl.addEventListener('click', function(evt) {
            taskList.remove(item);

@@ -21,4 +21,26 @@ export class TaskList { // несмотря на то, что будет тол�
             this.items.splice(index, 1);
         }
     }
+
+    up(item) {
+
+        const index = this.items.indexOf(item);
+
+        if (index !== -1) {
+            // MDN - попытаться найти способ попроще
+            const previous = this.items[index - 1];
+            this.items[index - 1] = item;
+            this.items[index] = previous;
+        }
+    }
+
+    down(item) {
+        const index = this.items.indexOf(item);
+
+        if (index !== -1) {
+            const next = this.items[index + 1];
+            this.items[index + 1] = item;
+            this.items[index] = next;
+        }
+    }
 }
