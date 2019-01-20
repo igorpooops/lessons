@@ -1,0 +1,8 @@
+[data-id=text] {
+    cursor: pointer;
+}
+
+.task-done {
+    text-decoration: line-through;
+    color: #999999;
+}

@@ -33,12 +33,21 @@ function rebuildTree(container, list) {
         liEl.className = 'list-group-item';
 
         liEl.innerHTML = `
-            ${item.name}
+            <span data-id="text">${item.name}</span>
             <button data-id="up" class="btn btn-danger btn-sm float-right">&uarr;</button>
             <button data-id="down" class="btn btn-danger btn-sm float-right">&darr;</button>
             <button data-id="remove" class="btn btn-danger btn-sm float-right">Remove</button>
         `;
         // data-<name> (html data-attributes)
+
+        const textEl = liEl.querySelector('[data-id=text]');
+        if (item.done) {
+            textEl.classList.add('task-done');
+        }
+        textEl.addEventListener('click', function(evt) {
+           item.done = !item.done;
+           rebuildTree(container, list);
+        });
 
         const upEl = liEl.querySelector('[data-id=up]'); // внутри элемента li
         upEl.addEventListener('click', function(evt) {
