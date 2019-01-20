@@ -34,6 +34,8 @@ function rebuildTree(container, list) {
 
         liEl.innerHTML = `
             ${item.name}
+            <button data-id="up" class="btn btn-danger btn-sm float-right">&uarr;</button>
+            <button data-id="down" class="btn btn-danger btn-sm float-right">&darr;</button>
             <button data-id="remove" class="btn btn-danger btn-sm float-right">Remove</button>
         `;
         // data-<name> (html data-attributes)
