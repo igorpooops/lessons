@@ -20,25 +20,22 @@ formEl.addEventListener('submit', function(evt) {
 
     nameEl.value = ''; // очистка формы
 
-    // создали элемент
-    const liEl = document.createElement('li');
-    // подставили textContent
-    liEl.textContent = task.name;
-    // console.log(liEl.parentElement);
-    // пока у элемента нет родителя, он нигде не отображается
-    liEl.className = 'list-group-item';
-
-    const removeEl = document.createElement('button');
-    removeEl.className = 'btn btn-danger btn-sm float-right';
-    removeEl.textContent = 'Remove';
-
-    removeEl.addEventListener('click', function(evt) {
-        liEl.remove(); // не везде работает
-        taskList.remove(task);
-    });
-
-    // Самая трудоёмкая часть синхронизация между DOM и памятью
-
-    liEl.appendChild(removeEl);
-    listEl.appendChild(liEl);
+    rebuildTree(listEl, taskList);
 });
+
+// memory + DOM
+// rebuild tree -> memory
+
+function rebuildTree(container, list) {
+    container.innerHTML = ''; // вырезать всех child'ов
+    for (const item of list.items) {
+        const liEl = document.createElement('li');
+        liEl.className = 'list-group-item';
+
+        liEl.innerHTML = `
+            ${item.name}
+            <button class="btn btn-danger btn-sm float-right">Remove</button>
+        `;
+        container.appendChild(liEl);
+    }
+}
