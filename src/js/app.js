@@ -48,4 +48,18 @@ function rebuildTree(container, list) {
 
         container.appendChild(liEl);
     }
+
+    // const children = Array.from(container.children);
+
+    if (list.items.length !== 0) {
+        const first = container.firstElementChild;
+        // classList - работа со списком классов, .add - добавление класса
+        first.querySelector('[data-id=up]').classList.add('invisible');
+        // const upEl = first.querySelector('[data-id=up]');
+        // const clsList = upEl.classList;
+        // clsList.add('invisible');
+
+        const last = container.lastElementChild;
+        last.querySelector('[data-id=down]').classList.add('invisible');
+    }
 }
