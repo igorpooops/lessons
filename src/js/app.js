@@ -6,7 +6,7 @@ const listEl = document.querySelector('#task-list');
 
 const taskList = new TaskList();
 
-formEl.addEventListener('submit', function(evt) {
+formEl.addEventListener('submit', (evt) => {
     // есть на некоторые события default'ое поведение
     // click на ссылку переход
     // при отправке формы - "страница перезагружает" (форма отправляется на сервер)
@@ -44,25 +44,25 @@ function rebuildTree(container, list) {
         if (item.done) {
             textEl.classList.add('task-done');
         }
-        textEl.addEventListener('click', function(evt) {
+        textEl.addEventListener('click', (evt) =>{
            item.done = !item.done;
            rebuildTree(container, list);
         });
 
         const upEl = liEl.querySelector('[data-id=up]'); // внутри элемента li
-        upEl.addEventListener('click', function(evt) {
+        upEl.addEventListener('click', (evt) => {
             taskList.up(item);
             rebuildTree(container, list);
         });
 
         const downEl = liEl.querySelector('[data-id=down]'); // внутри элемента li
-        downEl.addEventListener('click', function(evt) {
+        downEl.addEventListener('click', (evt) => {
             taskList.down(item);
             rebuildTree(container, list);
         });
 
         const removeEl = liEl.querySelector('[data-id=remove]'); // внутри элемента li
-        removeEl.addEventListener('click', function(evt) {
+        removeEl.addEventListener('click', (evt) => {
            taskList.remove(item);
            rebuildTree(container, list);
         });
