@@ -6,41 +6,27 @@ export class Task {
 }
 
 export class TaskList { // несмотря на то, что будет только один
-    constructor() {
-        this.items = [];
+    constructor(storage) {
+        this.storage = storage;
+    }
+
+    get items(){
+        return this.storage.items;
     }
 
     add(item) {
-        this.items.push(item); // в конец
+        this.storage.add(item); // в конец
     }
 
     remove(item) {
-        const index = this.items.indexOf(item);
-
-        if (index !== -1) {
-            this.items.splice(index, 1);
-        }
+        this.storage.remove(item);
     }
 
     up(item) {
-
-        const index = this.items.indexOf(item);
-
-        if (index !== -1) {
-            // MDN - попытаться найти способ попроще
-            const previous = this.items[index - 1];
-            this.items[index - 1] = item;
-            this.items[index] = previous;
-        }
+        this.storage.up(item);
     }
 
     down(item) {
-        const index = this.items.indexOf(item);
-
-        if (index !== -1) {
-            const next = this.items[index + 1];
-            this.items[index + 1] = item;
-            this.items[index] = next;
-        }
+        this.storage.down(item);
     }
 }

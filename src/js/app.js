@@ -1,10 +1,28 @@
 import {TaskList, Task} from './lib.js';
+import {TaskLocalStorage} from "./storage.js";
+
 
 const formEl = document.querySelector('#task-form');
 const nameEl = document.querySelector('#task-name');
 const listEl = document.querySelector('#task-list');
 
-const taskList = new TaskList();
+const taskList = new TaskList(new TaskLocalStorage());//создание таст-листа
+rebuildTree(listEl,taskList);//Перестройка дерева документа
+
+nameEl.addEventListener('input',(evt)=>{
+    evt.preventDefault();
+    console.log(evt);
+   if(nameEl.value === ''){
+       nameEl.classList.add('error');
+   }else{
+       nameEl.classList.remove('error');
+   }
+});
+
+nameEl.addEventListener('contextmenu',(evt)=>{
+   evt.preventDefault();
+});
+
 
 formEl.addEventListener('submit', (evt) => {
     // есть на некоторые события default'ое поведение
@@ -63,6 +81,7 @@ function rebuildTree(container, list) {
 
         const removeEl = liEl.querySelector('[data-id=remove]'); // внутри элемента li
         removeEl.addEventListener('click', (evt) => {
+            console.log(evt);
            taskList.remove(item);
            rebuildTree(container, list);
         });
